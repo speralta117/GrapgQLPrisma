@@ -4,8 +4,16 @@
   "description": "GraphQL-Prisma",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Salvador Peralta",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "graphql-yoga": "^1.17.4",
+    "prisma-client-lib": "^1.26.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
 }
