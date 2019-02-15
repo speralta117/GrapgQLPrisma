@@ -21,3 +21,26 @@ type Vote {
   link: Link!
   user: User!
 }
+
+type Meeting {
+    id: ID! @unique
+    createdAt: DateTime!
+    from: DateTime!
+    to: DateTime!
+    assigments: [Assigments!]!
+}
+
+type Assigments {
+    id: ID! @unique
+    name: String!
+    meeting: Meeting!
+    assignee: Assignee! @relation(name: "Assignee")
+    assitant: Assignee @relation(name: "Assistant")
+}
+
+type Assignee {
+    id: ID! @unique
+    Name: String!
+    Gender: String!
+    assigments: [Assigments!]!  @relation(name: "Assignee")
+}

@@ -1,7 +1,10 @@
-type Query {
-    info: String!
+scalar Date
+
+type Query {    
     feed: [Link!]!
-    link(id: ID!): Link
+    meetings: [Meeting]!
+    meeting(day: Date!): [Meeting]
+    assignee(id: ID!): Assignee
 }
 
 type Mutation {
@@ -9,6 +12,9 @@ type Mutation {
     signup(email: String!, password: String!, name: String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
     vote(linkId: ID!): Vote
+    addMember(Name: String!, Gender: String!): Assignee
+    addAssignment(Name: String!, meetingId: ID!, assigneeId: ID!): Assigments
+    createMeeting(from: Date): Meeting
 } 
 
 type Link {
@@ -40,4 +46,27 @@ type Vote {
   id: ID!
   link: Link!
   user: User!
+}
+
+type Meeting {
+    id: ID! 
+    createdAt: Date!
+    from: Date!
+    to: Date!
+    assigments: [Assigments!]!
+}
+
+type Assigments {
+    id: ID! 
+    name: String!
+    meeting: Meeting!
+    assignee: Assignee!
+    assitant: Assignee 
+}
+
+type Assignee {
+    id: ID!
+    Name: String!
+    Gender: String!
+    assigments: [Assigments!]!
 }

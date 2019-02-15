@@ -14,7 +14,10 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
 
 export interface Exists {
+  assigments: (where?: AssigmentsWhereInput) => Promise<boolean>;
+  assignee: (where?: AssigneeWhereInput) => Promise<boolean>;
   link: (where?: LinkWhereInput) => Promise<boolean>;
+  meeting: (where?: MeetingWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
   vote: (where?: VoteWhereInput) => Promise<boolean>;
 }
@@ -38,6 +41,44 @@ export interface Prisma {
    * Queries
    */
 
+  assigments: (where: AssigmentsWhereUniqueInput) => AssigmentsPromise;
+  assigmentses: (args?: {
+    where?: AssigmentsWhereInput;
+    orderBy?: AssigmentsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Assigments>;
+  assigmentsesConnection: (args?: {
+    where?: AssigmentsWhereInput;
+    orderBy?: AssigmentsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => AssigmentsConnectionPromise;
+  assignee: (where: AssigneeWhereUniqueInput) => AssigneePromise;
+  assignees: (args?: {
+    where?: AssigneeWhereInput;
+    orderBy?: AssigneeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Assignee>;
+  assigneesConnection: (args?: {
+    where?: AssigneeWhereInput;
+    orderBy?: AssigneeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => AssigneeConnectionPromise;
   link: (where: LinkWhereUniqueInput) => LinkPromise;
   links: (args?: {
     where?: LinkWhereInput;
@@ -57,6 +98,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => LinkConnectionPromise;
+  meeting: (where: MeetingWhereUniqueInput) => MeetingPromise;
+  meetings: (args?: {
+    where?: MeetingWhereInput;
+    orderBy?: MeetingOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Meeting>;
+  meetingsConnection: (args?: {
+    where?: MeetingWhereInput;
+    orderBy?: MeetingOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => MeetingConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -101,6 +161,38 @@ export interface Prisma {
    * Mutations
    */
 
+  createAssigments: (data: AssigmentsCreateInput) => AssigmentsPromise;
+  updateAssigments: (args: {
+    data: AssigmentsUpdateInput;
+    where: AssigmentsWhereUniqueInput;
+  }) => AssigmentsPromise;
+  updateManyAssigmentses: (args: {
+    data: AssigmentsUpdateManyMutationInput;
+    where?: AssigmentsWhereInput;
+  }) => BatchPayloadPromise;
+  upsertAssigments: (args: {
+    where: AssigmentsWhereUniqueInput;
+    create: AssigmentsCreateInput;
+    update: AssigmentsUpdateInput;
+  }) => AssigmentsPromise;
+  deleteAssigments: (where: AssigmentsWhereUniqueInput) => AssigmentsPromise;
+  deleteManyAssigmentses: (where?: AssigmentsWhereInput) => BatchPayloadPromise;
+  createAssignee: (data: AssigneeCreateInput) => AssigneePromise;
+  updateAssignee: (args: {
+    data: AssigneeUpdateInput;
+    where: AssigneeWhereUniqueInput;
+  }) => AssigneePromise;
+  updateManyAssignees: (args: {
+    data: AssigneeUpdateManyMutationInput;
+    where?: AssigneeWhereInput;
+  }) => BatchPayloadPromise;
+  upsertAssignee: (args: {
+    where: AssigneeWhereUniqueInput;
+    create: AssigneeCreateInput;
+    update: AssigneeUpdateInput;
+  }) => AssigneePromise;
+  deleteAssignee: (where: AssigneeWhereUniqueInput) => AssigneePromise;
+  deleteManyAssignees: (where?: AssigneeWhereInput) => BatchPayloadPromise;
   createLink: (data: LinkCreateInput) => LinkPromise;
   updateLink: (args: {
     data: LinkUpdateInput;
@@ -117,6 +209,22 @@ export interface Prisma {
   }) => LinkPromise;
   deleteLink: (where: LinkWhereUniqueInput) => LinkPromise;
   deleteManyLinks: (where?: LinkWhereInput) => BatchPayloadPromise;
+  createMeeting: (data: MeetingCreateInput) => MeetingPromise;
+  updateMeeting: (args: {
+    data: MeetingUpdateInput;
+    where: MeetingWhereUniqueInput;
+  }) => MeetingPromise;
+  updateManyMeetings: (args: {
+    data: MeetingUpdateManyMutationInput;
+    where?: MeetingWhereInput;
+  }) => BatchPayloadPromise;
+  upsertMeeting: (args: {
+    where: MeetingWhereUniqueInput;
+    create: MeetingCreateInput;
+    update: MeetingUpdateInput;
+  }) => MeetingPromise;
+  deleteMeeting: (where: MeetingWhereUniqueInput) => MeetingPromise;
+  deleteManyMeetings: (where?: MeetingWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -154,9 +262,18 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  assigments: (
+    where?: AssigmentsSubscriptionWhereInput
+  ) => AssigmentsSubscriptionPayloadSubscription;
+  assignee: (
+    where?: AssigneeSubscriptionWhereInput
+  ) => AssigneeSubscriptionPayloadSubscription;
   link: (
     where?: LinkSubscriptionWhereInput
   ) => LinkSubscriptionPayloadSubscription;
+  meeting: (
+    where?: MeetingSubscriptionWhereInput
+  ) => MeetingSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -172,6 +289,28 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type AssigmentsOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type AssigneeOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "Name_ASC"
+  | "Name_DESC"
+  | "Gender_ASC"
+  | "Gender_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type LinkOrderByInput =
   | "id_ASC"
@@ -193,6 +332,18 @@ export type VoteOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type MeetingOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "from_ASC"
+  | "from_DESC"
+  | "to_ASC"
+  | "to_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -208,6 +359,149 @@ export type UserOrderByInput =
   | "updatedAt_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export type AssigmentsWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface AssigmentsWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  meeting?: MeetingWhereInput;
+  assignee?: AssigneeWhereInput;
+  assitant?: AssigneeWhereInput;
+  AND?: AssigmentsWhereInput[] | AssigmentsWhereInput;
+  OR?: AssigmentsWhereInput[] | AssigmentsWhereInput;
+  NOT?: AssigmentsWhereInput[] | AssigmentsWhereInput;
+}
+
+export interface MeetingWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  from?: DateTimeInput;
+  from_not?: DateTimeInput;
+  from_in?: DateTimeInput[] | DateTimeInput;
+  from_not_in?: DateTimeInput[] | DateTimeInput;
+  from_lt?: DateTimeInput;
+  from_lte?: DateTimeInput;
+  from_gt?: DateTimeInput;
+  from_gte?: DateTimeInput;
+  to?: DateTimeInput;
+  to_not?: DateTimeInput;
+  to_in?: DateTimeInput[] | DateTimeInput;
+  to_not_in?: DateTimeInput[] | DateTimeInput;
+  to_lt?: DateTimeInput;
+  to_lte?: DateTimeInput;
+  to_gt?: DateTimeInput;
+  to_gte?: DateTimeInput;
+  assigments_every?: AssigmentsWhereInput;
+  assigments_some?: AssigmentsWhereInput;
+  assigments_none?: AssigmentsWhereInput;
+  AND?: MeetingWhereInput[] | MeetingWhereInput;
+  OR?: MeetingWhereInput[] | MeetingWhereInput;
+  NOT?: MeetingWhereInput[] | MeetingWhereInput;
+}
+
+export interface AssigneeWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  Name?: String;
+  Name_not?: String;
+  Name_in?: String[] | String;
+  Name_not_in?: String[] | String;
+  Name_lt?: String;
+  Name_lte?: String;
+  Name_gt?: String;
+  Name_gte?: String;
+  Name_contains?: String;
+  Name_not_contains?: String;
+  Name_starts_with?: String;
+  Name_not_starts_with?: String;
+  Name_ends_with?: String;
+  Name_not_ends_with?: String;
+  Gender?: String;
+  Gender_not?: String;
+  Gender_in?: String[] | String;
+  Gender_not_in?: String[] | String;
+  Gender_lt?: String;
+  Gender_lte?: String;
+  Gender_gt?: String;
+  Gender_gte?: String;
+  Gender_contains?: String;
+  Gender_not_contains?: String;
+  Gender_starts_with?: String;
+  Gender_not_starts_with?: String;
+  Gender_ends_with?: String;
+  Gender_not_ends_with?: String;
+  assigments_every?: AssigmentsWhereInput;
+  assigments_some?: AssigmentsWhereInput;
+  assigments_none?: AssigmentsWhereInput;
+  AND?: AssigneeWhereInput[] | AssigneeWhereInput;
+  OR?: AssigneeWhereInput[] | AssigneeWhereInput;
+  NOT?: AssigneeWhereInput[] | AssigneeWhereInput;
+}
+
+export type AssigneeWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
 export type LinkWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
@@ -363,6 +657,10 @@ export interface VoteWhereInput {
   NOT?: VoteWhereInput[] | VoteWhereInput;
 }
 
+export type MeetingWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
 export type UserWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
   email?: String;
@@ -371,6 +669,213 @@ export type UserWhereUniqueInput = AtLeastOne<{
 export type VoteWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
+
+export interface AssigmentsCreateInput {
+  name: String;
+  meeting: MeetingCreateOneWithoutAssigmentsInput;
+  assignee: AssigneeCreateOneWithoutAssigmentsInput;
+  assitant?: AssigneeCreateOneInput;
+}
+
+export interface MeetingCreateOneWithoutAssigmentsInput {
+  create?: MeetingCreateWithoutAssigmentsInput;
+  connect?: MeetingWhereUniqueInput;
+}
+
+export interface MeetingCreateWithoutAssigmentsInput {
+  from: DateTimeInput;
+  to: DateTimeInput;
+}
+
+export interface AssigneeCreateOneWithoutAssigmentsInput {
+  create?: AssigneeCreateWithoutAssigmentsInput;
+  connect?: AssigneeWhereUniqueInput;
+}
+
+export interface AssigneeCreateWithoutAssigmentsInput {
+  Name: String;
+  Gender: String;
+}
+
+export interface AssigneeCreateOneInput {
+  create?: AssigneeCreateInput;
+  connect?: AssigneeWhereUniqueInput;
+}
+
+export interface AssigneeCreateInput {
+  Name: String;
+  Gender: String;
+  assigments?: AssigmentsCreateManyWithoutAssigneeInput;
+}
+
+export interface AssigmentsCreateManyWithoutAssigneeInput {
+  create?:
+    | AssigmentsCreateWithoutAssigneeInput[]
+    | AssigmentsCreateWithoutAssigneeInput;
+  connect?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+}
+
+export interface AssigmentsCreateWithoutAssigneeInput {
+  name: String;
+  meeting: MeetingCreateOneWithoutAssigmentsInput;
+  assitant?: AssigneeCreateOneInput;
+}
+
+export interface AssigmentsUpdateInput {
+  name?: String;
+  meeting?: MeetingUpdateOneRequiredWithoutAssigmentsInput;
+  assignee?: AssigneeUpdateOneRequiredWithoutAssigmentsInput;
+  assitant?: AssigneeUpdateOneInput;
+}
+
+export interface MeetingUpdateOneRequiredWithoutAssigmentsInput {
+  create?: MeetingCreateWithoutAssigmentsInput;
+  update?: MeetingUpdateWithoutAssigmentsDataInput;
+  upsert?: MeetingUpsertWithoutAssigmentsInput;
+  connect?: MeetingWhereUniqueInput;
+}
+
+export interface MeetingUpdateWithoutAssigmentsDataInput {
+  from?: DateTimeInput;
+  to?: DateTimeInput;
+}
+
+export interface MeetingUpsertWithoutAssigmentsInput {
+  update: MeetingUpdateWithoutAssigmentsDataInput;
+  create: MeetingCreateWithoutAssigmentsInput;
+}
+
+export interface AssigneeUpdateOneRequiredWithoutAssigmentsInput {
+  create?: AssigneeCreateWithoutAssigmentsInput;
+  update?: AssigneeUpdateWithoutAssigmentsDataInput;
+  upsert?: AssigneeUpsertWithoutAssigmentsInput;
+  connect?: AssigneeWhereUniqueInput;
+}
+
+export interface AssigneeUpdateWithoutAssigmentsDataInput {
+  Name?: String;
+  Gender?: String;
+}
+
+export interface AssigneeUpsertWithoutAssigmentsInput {
+  update: AssigneeUpdateWithoutAssigmentsDataInput;
+  create: AssigneeCreateWithoutAssigmentsInput;
+}
+
+export interface AssigneeUpdateOneInput {
+  create?: AssigneeCreateInput;
+  update?: AssigneeUpdateDataInput;
+  upsert?: AssigneeUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: AssigneeWhereUniqueInput;
+}
+
+export interface AssigneeUpdateDataInput {
+  Name?: String;
+  Gender?: String;
+  assigments?: AssigmentsUpdateManyWithoutAssigneeInput;
+}
+
+export interface AssigmentsUpdateManyWithoutAssigneeInput {
+  create?:
+    | AssigmentsCreateWithoutAssigneeInput[]
+    | AssigmentsCreateWithoutAssigneeInput;
+  delete?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+  connect?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+  set?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+  disconnect?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+  update?:
+    | AssigmentsUpdateWithWhereUniqueWithoutAssigneeInput[]
+    | AssigmentsUpdateWithWhereUniqueWithoutAssigneeInput;
+  upsert?:
+    | AssigmentsUpsertWithWhereUniqueWithoutAssigneeInput[]
+    | AssigmentsUpsertWithWhereUniqueWithoutAssigneeInput;
+  deleteMany?: AssigmentsScalarWhereInput[] | AssigmentsScalarWhereInput;
+  updateMany?:
+    | AssigmentsUpdateManyWithWhereNestedInput[]
+    | AssigmentsUpdateManyWithWhereNestedInput;
+}
+
+export interface AssigmentsUpdateWithWhereUniqueWithoutAssigneeInput {
+  where: AssigmentsWhereUniqueInput;
+  data: AssigmentsUpdateWithoutAssigneeDataInput;
+}
+
+export interface AssigmentsUpdateWithoutAssigneeDataInput {
+  name?: String;
+  meeting?: MeetingUpdateOneRequiredWithoutAssigmentsInput;
+  assitant?: AssigneeUpdateOneInput;
+}
+
+export interface AssigmentsUpsertWithWhereUniqueWithoutAssigneeInput {
+  where: AssigmentsWhereUniqueInput;
+  update: AssigmentsUpdateWithoutAssigneeDataInput;
+  create: AssigmentsCreateWithoutAssigneeInput;
+}
+
+export interface AssigmentsScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  AND?: AssigmentsScalarWhereInput[] | AssigmentsScalarWhereInput;
+  OR?: AssigmentsScalarWhereInput[] | AssigmentsScalarWhereInput;
+  NOT?: AssigmentsScalarWhereInput[] | AssigmentsScalarWhereInput;
+}
+
+export interface AssigmentsUpdateManyWithWhereNestedInput {
+  where: AssigmentsScalarWhereInput;
+  data: AssigmentsUpdateManyDataInput;
+}
+
+export interface AssigmentsUpdateManyDataInput {
+  name?: String;
+}
+
+export interface AssigneeUpsertNestedInput {
+  update: AssigneeUpdateDataInput;
+  create: AssigneeCreateInput;
+}
+
+export interface AssigmentsUpdateManyMutationInput {
+  name?: String;
+}
+
+export interface AssigneeUpdateInput {
+  Name?: String;
+  Gender?: String;
+  assigments?: AssigmentsUpdateManyWithoutAssigneeInput;
+}
+
+export interface AssigneeUpdateManyMutationInput {
+  Name?: String;
+  Gender?: String;
+}
 
 export interface LinkCreateInput {
   description: String;
@@ -694,6 +1199,73 @@ export interface LinkUpdateManyMutationInput {
   url?: String;
 }
 
+export interface MeetingCreateInput {
+  from: DateTimeInput;
+  to: DateTimeInput;
+  assigments?: AssigmentsCreateManyWithoutMeetingInput;
+}
+
+export interface AssigmentsCreateManyWithoutMeetingInput {
+  create?:
+    | AssigmentsCreateWithoutMeetingInput[]
+    | AssigmentsCreateWithoutMeetingInput;
+  connect?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+}
+
+export interface AssigmentsCreateWithoutMeetingInput {
+  name: String;
+  assignee: AssigneeCreateOneWithoutAssigmentsInput;
+  assitant?: AssigneeCreateOneInput;
+}
+
+export interface MeetingUpdateInput {
+  from?: DateTimeInput;
+  to?: DateTimeInput;
+  assigments?: AssigmentsUpdateManyWithoutMeetingInput;
+}
+
+export interface AssigmentsUpdateManyWithoutMeetingInput {
+  create?:
+    | AssigmentsCreateWithoutMeetingInput[]
+    | AssigmentsCreateWithoutMeetingInput;
+  delete?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+  connect?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+  set?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+  disconnect?: AssigmentsWhereUniqueInput[] | AssigmentsWhereUniqueInput;
+  update?:
+    | AssigmentsUpdateWithWhereUniqueWithoutMeetingInput[]
+    | AssigmentsUpdateWithWhereUniqueWithoutMeetingInput;
+  upsert?:
+    | AssigmentsUpsertWithWhereUniqueWithoutMeetingInput[]
+    | AssigmentsUpsertWithWhereUniqueWithoutMeetingInput;
+  deleteMany?: AssigmentsScalarWhereInput[] | AssigmentsScalarWhereInput;
+  updateMany?:
+    | AssigmentsUpdateManyWithWhereNestedInput[]
+    | AssigmentsUpdateManyWithWhereNestedInput;
+}
+
+export interface AssigmentsUpdateWithWhereUniqueWithoutMeetingInput {
+  where: AssigmentsWhereUniqueInput;
+  data: AssigmentsUpdateWithoutMeetingDataInput;
+}
+
+export interface AssigmentsUpdateWithoutMeetingDataInput {
+  name?: String;
+  assignee?: AssigneeUpdateOneRequiredWithoutAssigmentsInput;
+  assitant?: AssigneeUpdateOneInput;
+}
+
+export interface AssigmentsUpsertWithWhereUniqueWithoutMeetingInput {
+  where: AssigmentsWhereUniqueInput;
+  update: AssigmentsUpdateWithoutMeetingDataInput;
+  create: AssigmentsCreateWithoutMeetingInput;
+}
+
+export interface MeetingUpdateManyMutationInput {
+  from?: DateTimeInput;
+  to?: DateTimeInput;
+}
+
 export interface UserCreateInput {
   name: String;
   email: String;
@@ -726,6 +1298,28 @@ export interface VoteUpdateInput {
   user?: UserUpdateOneRequiredWithoutVotesInput;
 }
 
+export interface AssigmentsSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: AssigmentsWhereInput;
+  AND?: AssigmentsSubscriptionWhereInput[] | AssigmentsSubscriptionWhereInput;
+  OR?: AssigmentsSubscriptionWhereInput[] | AssigmentsSubscriptionWhereInput;
+  NOT?: AssigmentsSubscriptionWhereInput[] | AssigmentsSubscriptionWhereInput;
+}
+
+export interface AssigneeSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: AssigneeWhereInput;
+  AND?: AssigneeSubscriptionWhereInput[] | AssigneeSubscriptionWhereInput;
+  OR?: AssigneeSubscriptionWhereInput[] | AssigneeSubscriptionWhereInput;
+  NOT?: AssigneeSubscriptionWhereInput[] | AssigneeSubscriptionWhereInput;
+}
+
 export interface LinkSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
@@ -735,6 +1329,17 @@ export interface LinkSubscriptionWhereInput {
   AND?: LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput;
   OR?: LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput;
   NOT?: LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput;
+}
+
+export interface MeetingSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: MeetingWhereInput;
+  AND?: MeetingSubscriptionWhereInput[] | MeetingSubscriptionWhereInput;
+  OR?: MeetingSubscriptionWhereInput[] | MeetingSubscriptionWhereInput;
+  NOT?: MeetingSubscriptionWhereInput[] | MeetingSubscriptionWhereInput;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -761,6 +1366,243 @@ export interface VoteSubscriptionWhereInput {
 
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface Assigments {
+  id: ID_Output;
+  name: String;
+}
+
+export interface AssigmentsPromise extends Promise<Assigments>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  meeting: <T = MeetingPromise>() => T;
+  assignee: <T = AssigneePromise>() => T;
+  assitant: <T = AssigneePromise>() => T;
+}
+
+export interface AssigmentsSubscription
+  extends Promise<AsyncIterator<Assigments>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  meeting: <T = MeetingSubscription>() => T;
+  assignee: <T = AssigneeSubscription>() => T;
+  assitant: <T = AssigneeSubscription>() => T;
+}
+
+export interface Meeting {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  from: DateTimeOutput;
+  to: DateTimeOutput;
+}
+
+export interface MeetingPromise extends Promise<Meeting>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  from: () => Promise<DateTimeOutput>;
+  to: () => Promise<DateTimeOutput>;
+  assigments: <T = FragmentableArray<Assigments>>(args?: {
+    where?: AssigmentsWhereInput;
+    orderBy?: AssigmentsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface MeetingSubscription
+  extends Promise<AsyncIterator<Meeting>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  from: () => Promise<AsyncIterator<DateTimeOutput>>;
+  to: () => Promise<AsyncIterator<DateTimeOutput>>;
+  assigments: <T = Promise<AsyncIterator<AssigmentsSubscription>>>(args?: {
+    where?: AssigmentsWhereInput;
+    orderBy?: AssigmentsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface Assignee {
+  id: ID_Output;
+  Name: String;
+  Gender: String;
+}
+
+export interface AssigneePromise extends Promise<Assignee>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  Name: () => Promise<String>;
+  Gender: () => Promise<String>;
+  assigments: <T = FragmentableArray<Assigments>>(args?: {
+    where?: AssigmentsWhereInput;
+    orderBy?: AssigmentsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface AssigneeSubscription
+  extends Promise<AsyncIterator<Assignee>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  Name: () => Promise<AsyncIterator<String>>;
+  Gender: () => Promise<AsyncIterator<String>>;
+  assigments: <T = Promise<AsyncIterator<AssigmentsSubscription>>>(args?: {
+    where?: AssigmentsWhereInput;
+    orderBy?: AssigmentsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface AssigmentsConnection {
+  pageInfo: PageInfo;
+  edges: AssigmentsEdge[];
+}
+
+export interface AssigmentsConnectionPromise
+  extends Promise<AssigmentsConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<AssigmentsEdge>>() => T;
+  aggregate: <T = AggregateAssigmentsPromise>() => T;
+}
+
+export interface AssigmentsConnectionSubscription
+  extends Promise<AsyncIterator<AssigmentsConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AssigmentsEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAssigmentsSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AssigmentsEdge {
+  node: Assigments;
+  cursor: String;
+}
+
+export interface AssigmentsEdgePromise
+  extends Promise<AssigmentsEdge>,
+    Fragmentable {
+  node: <T = AssigmentsPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AssigmentsEdgeSubscription
+  extends Promise<AsyncIterator<AssigmentsEdge>>,
+    Fragmentable {
+  node: <T = AssigmentsSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateAssigments {
+  count: Int;
+}
+
+export interface AggregateAssigmentsPromise
+  extends Promise<AggregateAssigments>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAssigmentsSubscription
+  extends Promise<AsyncIterator<AggregateAssigments>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AssigneeConnection {
+  pageInfo: PageInfo;
+  edges: AssigneeEdge[];
+}
+
+export interface AssigneeConnectionPromise
+  extends Promise<AssigneeConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<AssigneeEdge>>() => T;
+  aggregate: <T = AggregateAssigneePromise>() => T;
+}
+
+export interface AssigneeConnectionSubscription
+  extends Promise<AsyncIterator<AssigneeConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AssigneeEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAssigneeSubscription>() => T;
+}
+
+export interface AssigneeEdge {
+  node: Assignee;
+  cursor: String;
+}
+
+export interface AssigneeEdgePromise
+  extends Promise<AssigneeEdge>,
+    Fragmentable {
+  node: <T = AssigneePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AssigneeEdgeSubscription
+  extends Promise<AsyncIterator<AssigneeEdge>>,
+    Fragmentable {
+  node: <T = AssigneeSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateAssignee {
+  count: Int;
+}
+
+export interface AggregateAssigneePromise
+  extends Promise<AggregateAssignee>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAssigneeSubscription
+  extends Promise<AsyncIterator<AggregateAssignee>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Link {
@@ -904,29 +1746,6 @@ export interface LinkConnectionSubscription
   aggregate: <T = AggregateLinkSubscription>() => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface LinkEdge {
   node: Link;
   cursor: String;
@@ -956,6 +1775,60 @@ export interface AggregateLinkPromise
 
 export interface AggregateLinkSubscription
   extends Promise<AsyncIterator<AggregateLink>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface MeetingConnection {
+  pageInfo: PageInfo;
+  edges: MeetingEdge[];
+}
+
+export interface MeetingConnectionPromise
+  extends Promise<MeetingConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MeetingEdge>>() => T;
+  aggregate: <T = AggregateMeetingPromise>() => T;
+}
+
+export interface MeetingConnectionSubscription
+  extends Promise<AsyncIterator<MeetingConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MeetingEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMeetingSubscription>() => T;
+}
+
+export interface MeetingEdge {
+  node: Meeting;
+  cursor: String;
+}
+
+export interface MeetingEdgePromise extends Promise<MeetingEdge>, Fragmentable {
+  node: <T = MeetingPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MeetingEdgeSubscription
+  extends Promise<AsyncIterator<MeetingEdge>>,
+    Fragmentable {
+  node: <T = MeetingSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateMeeting {
+  count: Int;
+}
+
+export interface AggregateMeetingPromise
+  extends Promise<AggregateMeeting>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMeetingSubscription
+  extends Promise<AsyncIterator<AggregateMeeting>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -1084,6 +1957,97 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface AssigmentsSubscriptionPayload {
+  mutation: MutationType;
+  node: Assigments;
+  updatedFields: String[];
+  previousValues: AssigmentsPreviousValues;
+}
+
+export interface AssigmentsSubscriptionPayloadPromise
+  extends Promise<AssigmentsSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = AssigmentsPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = AssigmentsPreviousValuesPromise>() => T;
+}
+
+export interface AssigmentsSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AssigmentsSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = AssigmentsSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = AssigmentsPreviousValuesSubscription>() => T;
+}
+
+export interface AssigmentsPreviousValues {
+  id: ID_Output;
+  name: String;
+}
+
+export interface AssigmentsPreviousValuesPromise
+  extends Promise<AssigmentsPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+}
+
+export interface AssigmentsPreviousValuesSubscription
+  extends Promise<AsyncIterator<AssigmentsPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AssigneeSubscriptionPayload {
+  mutation: MutationType;
+  node: Assignee;
+  updatedFields: String[];
+  previousValues: AssigneePreviousValues;
+}
+
+export interface AssigneeSubscriptionPayloadPromise
+  extends Promise<AssigneeSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = AssigneePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = AssigneePreviousValuesPromise>() => T;
+}
+
+export interface AssigneeSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AssigneeSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = AssigneeSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = AssigneePreviousValuesSubscription>() => T;
+}
+
+export interface AssigneePreviousValues {
+  id: ID_Output;
+  Name: String;
+  Gender: String;
+}
+
+export interface AssigneePreviousValuesPromise
+  extends Promise<AssigneePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  Name: () => Promise<String>;
+  Gender: () => Promise<String>;
+}
+
+export interface AssigneePreviousValuesSubscription
+  extends Promise<AsyncIterator<AssigneePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  Name: () => Promise<AsyncIterator<String>>;
+  Gender: () => Promise<AsyncIterator<String>>;
+}
+
 export interface LinkSubscriptionPayload {
   mutation: MutationType;
   node: Link;
@@ -1132,6 +2096,56 @@ export interface LinkPreviousValuesSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   description: () => Promise<AsyncIterator<String>>;
   url: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MeetingSubscriptionPayload {
+  mutation: MutationType;
+  node: Meeting;
+  updatedFields: String[];
+  previousValues: MeetingPreviousValues;
+}
+
+export interface MeetingSubscriptionPayloadPromise
+  extends Promise<MeetingSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MeetingPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MeetingPreviousValuesPromise>() => T;
+}
+
+export interface MeetingSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MeetingSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MeetingSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MeetingPreviousValuesSubscription>() => T;
+}
+
+export interface MeetingPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  from: DateTimeOutput;
+  to: DateTimeOutput;
+}
+
+export interface MeetingPreviousValuesPromise
+  extends Promise<MeetingPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  from: () => Promise<DateTimeOutput>;
+  to: () => Promise<DateTimeOutput>;
+}
+
+export interface MeetingPreviousValuesSubscription
+  extends Promise<AsyncIterator<MeetingPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  from: () => Promise<AsyncIterator<DateTimeOutput>>;
+  to: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -1232,6 +2246,11 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -1240,11 +2259,6 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
@@ -1264,7 +2278,19 @@ export type Long = string;
 
 export const models: Model[] = [
   {
+    name: "Assigments",
+    embedded: false
+  },
+  {
+    name: "Assignee",
+    embedded: false
+  },
+  {
     name: "Link",
+    embedded: false
+  },
+  {
+    name: "Meeting",
     embedded: false
   },
   {
